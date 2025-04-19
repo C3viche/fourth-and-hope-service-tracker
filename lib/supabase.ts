@@ -19,8 +19,10 @@ export type Client = {
     date_added: Date;
   };
   
-  export type ShowerLog = {
+  export type Log = {
     id: string;
+    service: string;
     client_id: string;
     date: Date;
+    data: JSON;
   };
