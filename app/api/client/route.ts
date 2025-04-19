@@ -1,5 +1,7 @@
 import { supabase } from '@/lib/supabase';
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { v4 as uuidv4 } from 'uuid';
+
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
@@ -9,9 +11,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   if (req.method === 'POST') {
-    const { full_name, age_group, gender, ethnicity, language, pronunciation } = req.body;
+    const { name, pronunciation, age_group, sex, ethnicity, language, notes } = req.body;
+
+    // Generate ID and date
+    const id = uuidv4();
+    const date_added = new Date().toISOString();
+
     const { data, error } = await supabase.from('Client').insert([
-      { full_name, age_group, gender, ethnicity, language, pronunciation },
+      { id, date_added, name, pronunciation, age_group, sex, ethnicity, language, notes },
     ]);
     if (error) return res.status(500).json({ error });
     return res.status(201).json(data);

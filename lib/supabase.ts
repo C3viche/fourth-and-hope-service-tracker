@@ -14,8 +14,8 @@ export type Client = {
     sex: string;
     ethnicity: string;
     language: string;
-    date_added: Date;
     notes: string;
+    date_added: Date;
   };
   
   export type ShowerLog = {
