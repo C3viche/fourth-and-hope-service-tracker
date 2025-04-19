@@ -1,6 +1,22 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    // primary colors
+    --green: #2E6C4A;
+    --light-green: #0C9D4E;
+    --white: #FAFAFA;
+    --black: #323232;
+    
+    //secondary colors
+    --dark-grey: #6B6B6B;
+    --grey: #D0D0D0;
+    --light-grey: #F1F1F1;
+    --hover-bg: #989898;
+
+    // pi chart colors
+    --matcha: #CCD5AE; // child
+    --beige: #E9EDC9; // young adult
+    --cornsilk: #FEFAE0; // middle age
+    --papaya: #FAEDCD; // senior
+    --brown: #D4A373;
 }
 
 * {
