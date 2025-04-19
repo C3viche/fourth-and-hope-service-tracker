@@ -1,6 +1,8 @@
 // pages/login.tsx
+'use client';
+
 import { supabase } from '@/lib/supabase';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useSession } from '@supabase/auth-helpers-react';
 
