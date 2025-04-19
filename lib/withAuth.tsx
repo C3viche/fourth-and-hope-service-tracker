@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSession } from '@supabase/auth-helpers-react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 
 export function withAuth(Component: any, requiredRole?: 'admin' | 'staff') {
@@ -25,7 +25,7 @@ export function withAuth(Component: any, requiredRole?: 'admin' | 'staff') {
             setUserRole(data?.role || 'staff');
           }
         } else {
-          router.push('/auth/login'); // Redirect to login if not authenticated
+          router.push('/login'); // Redirect to login if not authenticated
         }
       };
 
