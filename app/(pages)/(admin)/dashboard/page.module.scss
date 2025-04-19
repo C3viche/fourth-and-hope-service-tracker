@@ -1,1 +1,47 @@
-@use "@/app/mixins.scss"
+@use "@/app/mixins.scss";
+
+.page {
+    display: flex;
+    padding: var(--page-padding);
+    flex-direction: column;
+    gap: var(--element-spacing);
+}
+
+.spotlight {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    background-color: var(--green);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+
+    h2 {
+        color: var(--white);
+    }
+}
+
+.spotlightElements {
+    display: flex;
+    gap: 24px;
+}
+
+.spotlightElement {
+    background-color: var(--white);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+}
+
+.services {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    background-color: var(--matcha);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+
+    h2 {
+        color: var(--green);
+    }
+}

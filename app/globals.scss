@@ -21,19 +21,23 @@
     --papaya: #FAEDCD;
     --brown: #D4A373;
 
+    // Page
+    --element-spacing: 40px;
+    --nav-to-element-spacing: 160px;
+    --page-padding: 80px;
+
     // Cards
     --vertical-card-gap: 100px;
     --card-border-radius: 20px;
-    --card-padding: 60px;
+    --card-padding: 40px;
     --card-background: var(--white);
-    --element-spacing: 200px;
-    --nav-to-element-spacing: 160px;
 }
 
 html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  font-family: var(--fontPrimary);
 }
 
 * {
