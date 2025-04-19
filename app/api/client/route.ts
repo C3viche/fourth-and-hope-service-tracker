@@ -18,7 +18,7 @@ export async function POST(req: Request) {
   const date_added = new Date().toISOString();
 
   const { data, error } = await supabase.from('Client').insert([
-    { id, date_added, name, pronunciation, age_group, sex, ethnicity, language, notes },
+    { id, date_added, name, pronunciation, age_group, sex, ethnicity, language, stay_type, notes },
   ]);
 
   if (error) return NextResponse.json({ error }, { status: 500 });
