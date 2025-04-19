@@ -14,6 +14,7 @@ export type Client = {
     sex: string;
     ethnicity: string;
     language: string;
+    stay_type: string;
     notes: string;
     date_added: Date;
   };
