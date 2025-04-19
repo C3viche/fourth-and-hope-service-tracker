@@ -20,7 +20,6 @@ export async function POST(req: Request) {
     const {service, clientid, date, data} = body;
 
     const id = uuidv4();
-    const date_added = new Date().toISOString();
 
     const { data: instertedRows, error } = await supabase.from('Client').insert([// check the data that is being gotten
         { id, service, clientid, date, data },
