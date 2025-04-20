@@ -1,55 +1,44 @@
-'use client';
+import { redirect } from 'next/navigation';
+import { createClient } from '@/utils/supabase/server';
 
-import { useEffect, useState } from 'react';
 import styles from './layout.module.scss'
+import GeminiBox from '@/app/(components)/gemini-box/gemini-box';
 
-const shouldRun = false;
 
-const Dashboard = ({ children }: { children: React.ReactNode }) => {
-  const [modelResponse, setModelResponse] = useState("");
-  const [fullText, setFullText] = useState("");
+const Dashboard = async({ children }: { children: React.ReactNode }) => {
+  const supabase = await createClient(); // already scoped to the current request
 
-  // Typing effect when full text is set
-  useEffect(() => {
-    if(!shouldRun) { return; }
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+console.log("HI");
+  if (userError || !user) {
+    return redirect('/login');
+  }
 
-    let i = 0;
-    if (!fullText) return;
-
-    const interval = setInterval(() => {
-      setModelResponse(prev => prev + fullText[i]);
-      i++;
-      if (i >= fullText.length) clearInterval(interval);
-    }, 30); // adjust speed here
-
-    return () => clearInterval(interval);
-  }, [fullText]);
-
-  // Get Gemini response when page loads
-  useEffect(() => {
-    const fetchResponse = async () => {
-      const res = await fetch("/api/gemini", {
-        method: "POST",
-        body: JSON.stringify({ prompt: "Introduce yourself. Write only three sentences" }),
-        headers: { "Content-Type": "application/json" },
-      });
-      const data = await res.json();
-      setFullText(data.content); // triggers typing
-    };
-
-    if (shouldRun) { fetchResponse(); };
-  }, []);
-
+  const {
+    data: roleData,
+    error: roleError,
+  } = await supabase
+    .from('Roles')
+    .select('role')
+    .eq('user_id', user.id)
+    .maybeSingle();
+  console.log(roleData);
+  console.log("HELLO");
+  if (roleError || roleData?.role !== 'admin') {
+    return redirect('/unauthorized');
+  }
   return (
     <main className={styles.page}>
         <h1>Dashboard</h1>
         <div className={styles.spotlight}>
             <h2>Spotlight</h2>
             <div className={styles.spotlightElements}>
-                <div className={styles.spotlightElement}>
-                    <h3>Model Review</h3>
-                    <p>{modelResponse}</p>
-                </div>
+              <div className={styles.spotlightElement}>
+                <GeminiBox/>
+              </div>
                 <div className={styles.spotlightElement}>
                     <h3>Demographic Data</h3>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore porro sint iure accusamus numquam maiores praesentium, error sequi eum exercitationem aspernatur provident quasi dolorum perferendis quos adipisci corrupti aperiam assumenda?</p>
