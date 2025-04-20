@@ -22,7 +22,9 @@ export default async function PagesLayout({
     .select("role")
     .eq("user_id", user.id)
     .maybeSingle();
-
+  if (roleError) {
+    console.log(roleError);
+  }
   // Pass the `isAdmin` prop to Sidebar
   const isAdmin = roleData?.role === "admin";
   const { full_name, avatar_url } = user.user_metadata;

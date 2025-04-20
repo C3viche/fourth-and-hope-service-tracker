@@ -4,17 +4,19 @@ import { useState } from "react";
 import { IoTrashBinOutline } from "react-icons/io5";
 
 type LogEntry = {
-  id: number;
-  name: string;
-  comments: string;
+  id: string;
+  service: string;
+  client_id: string;
   date: string;
+  comments: string;
+  data: unknown;
 };
 
 type LogTableProps = {
-  id: number;
+  id: string;
   title: string;
   users: string[];
-  deleteLog: (id: number) => void;
+  deleteLog: (id: string) => void;
 };
 
 export default function LogTable({
@@ -29,15 +31,17 @@ export default function LogTable({
     setEntries([
       ...entries,
       {
-        id: Date.now(),
-        name: users[0],
+        id: Date.now().toString(),
+        service: "shower",
+        client_id: users[0],
         comments: "",
         date: new Date().toLocaleDateString(),
+        data: {},
       },
     ]);
   };
 
-  const updateEntry = (id: number, field: keyof LogEntry, value: string) => {
+  const updateEntry = (id: string, field: keyof LogEntry, value: string) => {
     setEntries(
       entries.map((entry) =>
         entry.id === id ? { ...entry, [field]: value } : entry
@@ -45,7 +49,7 @@ export default function LogTable({
     );
   };
 
-  const deleteEntry = (id: number) => {
+  const deleteEntry = (id: string) => {
     setEntries(entries.filter((entry) => entry.id !== id));
   };
 
@@ -67,8 +71,8 @@ export default function LogTable({
         {entries.map((entry) => (
           <div className={styles.row} key={entry.id}>
             <select
-              value={entry.name}
-              onChange={(e) => updateEntry(entry.id, "name", e.target.value)}
+              value={entry.service}
+              onChange={(e) => updateEntry(entry.id, "service", e.target.value)}
             >
               {users.map((user) => (
                 <option key={user} value={user}>
