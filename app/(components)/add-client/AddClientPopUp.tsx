@@ -15,7 +15,7 @@ type AddUserModalProps = {
 export default function AddUserModal({ onClose, onSave, onDelete, userData }: AddUserModalProps) {
   const [formData, setFormData] = useState<User>(
     userData || {
-      id: Date.now(),
+      id: "temp",
       name: "",
       pronunciation: "",
       age_group: "",
@@ -138,7 +138,7 @@ export default function AddUserModal({ onClose, onSave, onDelete, userData }: Ad
         </form>
         <div className={styles.modalButtons}>
           <button onClick={handleClose} className={styles.closeButton}>Cancel</button>
-          {onDelete && <button onClick={handleClose} className={styles.closeButton}>Delete</button>}
+          {onDelete && <button onClick={onDelete} className={styles.closeButton}>Delete</button>}
           <button onClick={() => onSave(formData)} className={styles.saveButton}>Save</button>
         </div>
       </div>

@@ -26,3 +26,14 @@ export async function POST(req: Request) {
   if (error) return NextResponse.json({ error }, { status: 500 });
   return NextResponse.json(data, { status: 201 });
 }
+
+// Handle DELETE requests
+export async function DELETE(req: Request) {
+  const supabase = await createClient();
+  const { id } = await req.json();
+
+  const { error } = await supabase.from('Client').delete().eq('id', id);
+
+  if (error) return NextResponse.json({ error }, { status: 500 });
+  return NextResponse.json({ success: true }, { status: 200 });
+}

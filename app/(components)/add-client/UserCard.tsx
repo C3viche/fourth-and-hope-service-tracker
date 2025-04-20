@@ -21,22 +21,65 @@ export type User = {
 type UserCardProps = {
   user?: User;
   isAddButton?: boolean;
+  onUpdated?: () => void; // <-- Add this
 };
 
-export default function UserCard({ user, isAddButton }: UserCardProps) {
+export default function UserCard({ user, isAddButton, onUpdated }: UserCardProps) {
   const [open, setOpen] = useState(false);
 
   const handleClose = () => setOpen(false);
 
-  const handleSave = (updatedUser: User) => {
-    console.log("Saved:", updatedUser);
-    setOpen(false);
+  const handleSave = async (updatedUser: User) => {
+    try {
+      const res = await fetch('/api/client', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedUser),
+      });
+  
+      const data = await res.json();
+  
+      if (!res.ok) {
+        console.error('Failed to save user:', data);
+      } else {
+        console.log("Saved!", data);
+      }
+    } catch (err) {
+      console.error("Error saving user:", err);
+    } finally {
+      onUpdated?.(); // refresh
+      setOpen(false);
+    }
   };
+  
 
-  const handleDelete = () => {
-    console.log("Deleted:", user?.name);
+  const handleDelete = async () => {
+  try {
+    const res = await fetch('/api/client', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id: user?.id }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      console.error('Failed to delete user:', data);
+    } else {
+      console.log("Deleted!", data);
+    }
+  } catch (err) {
+    console.error("Error deleting user:", err);
+  } finally {
+    onUpdated?.();
     setOpen(false);
-  };
+  }
+};
+
 
   return (
     <>

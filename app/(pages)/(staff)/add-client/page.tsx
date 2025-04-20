@@ -12,31 +12,31 @@ export default function AddUsersPage() {
   const [users, setUsers] = useState<Client[]>([]); // of type Client
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchClients = async () => {
-      try {
-        const res = await fetch('/api/client');
-        const data = await res.json();
-        setUsers(data);
-        console.log("FETCHED! ", data);
-      } catch (err) {
-        console.error('Failed to fetch clients:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchClients = async () => {
+    try {
+      const res = await fetch('/api/client');
+      const data = await res.json();
+      setUsers(data);
+      console.log("FETCHED! ", data);
+    } catch (err) {
+      console.error('Failed to fetch clients:', err);
+    } finally {
+      setLoading(false);
+    }
+  }; 
 
+  useEffect(() => {
     fetchClients();
   }, []);
 
   return (
     <AddUsersLayout>
-      <UserCard isAddButton />
+      <UserCard isAddButton onUpdated={fetchClients} />
       {loading ? (
         <p>Loading clients...</p>
       ) : (
         users.map((user) => (
-          <UserCard key={user.id} user={user} />
+          <UserCard key={user.id} user={user} onUpdated={fetchClients} />
         ))
       )}
     </AddUsersLayout>
