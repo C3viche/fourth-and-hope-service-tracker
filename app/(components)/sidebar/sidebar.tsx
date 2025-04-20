@@ -3,10 +3,9 @@
 import styles from './sidebar.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation'; // App Router
 import default_profile from "../../../public/default_profile.png";
-//import { supabase } from '@/lib/supabase';
-// import { useRouter } from 'next/router';
+import { createClient } from '@/utils/supabase/client';
 
 
 export default function Sidebar() {
@@ -16,6 +15,8 @@ export default function Sidebar() {
 //     router.push('/auth/login');
 //   };
   const pathname = usePathname();
+  const router = useRouter();
+  const supabase = createClient();
 
   const services = ["food", "shelter", "hygiene"];
   const navLinks = [
@@ -24,6 +25,11 @@ export default function Sidebar() {
     { name: 'Log', href: '/logger' },
     { name: 'Users', href: '/add-client' },
   ];
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    router.push('/login');
+  };
 
   return (
     <nav className={styles.background}>
@@ -42,9 +48,9 @@ export default function Sidebar() {
             </ul>
         </div>
 
-        <div className={styles.logout} 
-        //onClick={handleLogout}
-        >Log Out</div>
+        <div className={styles.logout} onClick={handleLogout}>
+          Log Out
+        </div>
       </div>
     </nav>
   );
