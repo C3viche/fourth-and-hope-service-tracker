@@ -1,5 +1,6 @@
 import styles from './showerLog.module.scss';
 import { FaTrash, FaEdit } from 'react-icons/fa';
+import { FaRegTrashCan } from "react-icons/fa6";
 
 export default function LogTable({ data, onDelete, onUpdate }: any) {
   return (

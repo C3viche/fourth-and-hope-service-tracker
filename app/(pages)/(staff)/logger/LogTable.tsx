@@ -2,8 +2,8 @@
 import styles from './page.module.scss';
 import { useState } from 'react';
 import { IoTrashBinOutline } from "react-icons/io5";
+import { FaRegTrashAlt } from "react-icons/fa";
 
-import IconIonTrashBinOutline from 'react';
 type LogEntry = {
   id: number;
   name: string;
@@ -12,11 +12,13 @@ type LogEntry = {
 };
 
 type LogTableProps = {
+  id: number;
   title: string;
   users: string[];
+  deleteLog: (id: number) => void;
 };
 
-export default function LogTable({ title, users }: LogTableProps) {
+export default function LogTable({ id, title, users, deleteLog }: LogTableProps) {
   const [entries, setEntries] = useState<LogEntry[]>([]);
 
   const handleAddEntry = () => {
@@ -40,13 +42,13 @@ export default function LogTable({ title, users }: LogTableProps) {
   const deleteEntry = (id: number) => {
     setEntries(entries.filter(entry => entry.id !== id));
   };
-  const deleteLog = (id: number) => {
-    setEntries(entries.filter(entry => entry.id !== id));
-  };
 
   return (
     <div className={styles.logTable}>
-      <h2>{title}</h2>
+      <div className={styles.logHeader}>
+        <h2>{title}</h2>
+        <button onClick={() => deleteLog(id)}><FaRegTrashAlt size={40} /></button>
+      </div>
       <div className={styles.table}>
         <div className={styles.header}>
           <span>Name</span>

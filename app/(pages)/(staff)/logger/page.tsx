@@ -15,13 +15,17 @@ export default function LogsContainer() {
     setNextId(nextId + 1);
   };
 
+  const deleteLog = (id: number) => {
+    setLogs(logs.filter(entry => entry.id !== id));
+  };
+
   return (
     <main className={styles.page}>
       <h1 className={styles.title}>Add Client</h1>
 
     <div className={styles.logsContainer}>
       {logs.map(log => (
-        <LogTable key={log.id} title={log.title} users={users} />
+        <LogTable key={log.id} id={log.id} title={log.title} users={users} deleteLog={deleteLog} />
       ))}
       <button onClick={addNewLog} className={styles.addLogBtn}>
         + Add New Log

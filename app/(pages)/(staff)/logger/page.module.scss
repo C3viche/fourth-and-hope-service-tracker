@@ -2,11 +2,28 @@
     padding: 2rem 3rem;
   }
   
+  .logHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    button, input[type="submit"], input[type="reset"] {
+        background: none;
+        color: inherit;
+        border: none;
+        padding: 0;
+        font: inherit;
+        cursor: pointer;
+        outline: inherit;
+    }
+  }
+
   .title {
     font-size: 36px;
     font-weight: 600;
-    margin-bottom: 2rem;
   }
+
   .logsContainer {
     display: flex;
     flex-direction: column;
