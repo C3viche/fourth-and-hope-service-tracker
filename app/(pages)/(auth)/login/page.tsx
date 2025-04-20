@@ -1,20 +1,23 @@
-// pages/login.tsx
 'use client';
 
-import { supabase } from '@/lib/supabase';
+import { createClient } from '@/utils/supabase/client';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { useSession } from '@supabase/auth-helpers-react';
 
 export default function LoginPage() {
-  const session = useSession();
+  const supabase = createClient();
   const router = useRouter();
 
   useEffect(() => {
-    if (session) {
-      router.push('/'); // Redirect after login
-    }
-  }, [session]);
+    // Optional: redirect to home if already logged in
+    const checkSession = async () => {
+      const { data } = await supabase.auth.getSession();
+      if (data.session) {
+        router.push('/');
+      }
+    };
+    checkSession();
+  }, []);
 
   const handleLogin = async () => {
     await supabase.auth.signInWithOAuth({
