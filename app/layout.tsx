@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.scss";
 import { Be_Vietnam_Pro } from "next/font/google";
+import Sidebar from "./(components)/sidebar/sidebar";
 
 const beVietnamPro = Be_Vietnam_Pro({
   subsets: ["latin"],
@@ -22,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${beVietnamPro.variable}`}>
+        <Sidebar />
         {children}
       </body>
     </html>
