@@ -13,7 +13,7 @@ const Dashboard = async({ children }: { children: React.ReactNode }) => {
     data: { user },
     error: userError,
   } = await supabase.auth.getUser();
-console.log("HI");
+    console.log("HI");
   if (userError || !user) {
     return redirect('/login');
   }
@@ -31,7 +31,6 @@ console.log("HI");
   if (roleError || roleData?.role !== 'admin') {
     return redirect('/unauthorized');
   }
-
 
   // THIS IS HOW YOU FETCH LOGS !!!!
   const {
@@ -77,10 +76,10 @@ console.log("HI");
         <div className={styles.spotlight}>
             <h2>Spotlight</h2>
             <div className={styles.spotlightElements}>
-              <div className={styles.spotlightElement}>
+              <div className={styles.geminiSpotlightElement}>
                 <GeminiBox/>
               </div>
-              <div className={styles.spotlightElement}>
+              <div className={styles.infoSpotlightElement}>
                   <h3>Demographic Data</h3>
                   {/* I just printed the logs here but you can take this and input to charts! */}
                   <h3>All Logs</h3>
@@ -122,8 +121,7 @@ console.log("HI");
             <h2>Services</h2>
             <div className={styles.tabs}>
                 {children} {/* This is where tab content loads */}
-        </div>
-
+            </div>
         </div>
     </main>
   );

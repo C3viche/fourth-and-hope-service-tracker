@@ -26,16 +26,27 @@
 .spotlightElements {
     display: flex;
     gap: 24px;
+    flex: 0 0 1;
+    width: 100%;
 
     h3 {
         line-height: 200%;
     }
 }
 
-.spotlightElement {
+.geminiSpotlightElement {
     background-color: var(--white);
     padding: var(--card-padding);
     border-radius: var(--card-border-radius);
+    flex-grow: 1;
+}
+
+.infoSpotlightElement {
+    background-color: var(--white);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    // width: 100%;
+    flex-grow: 2;
 }
 
 .services {
