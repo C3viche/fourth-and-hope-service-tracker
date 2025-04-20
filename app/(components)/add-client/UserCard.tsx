@@ -30,9 +30,11 @@ export default function UserCard({ user, isAddButton, onUpdated }: UserCardProps
   const handleClose = () => setOpen(false);
 
   const handleSave = async (updatedUser: User) => {
+    const isNewClient = isAddButton; // if we are adding, means it's a new client
+    console.log(updatedUser.id)
     try {
       const res = await fetch('/api/client', {
-        method: 'POST',
+        method: isNewClient ? 'POST' : 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -44,7 +46,7 @@ export default function UserCard({ user, isAddButton, onUpdated }: UserCardProps
       if (!res.ok) {
         console.error('Failed to save user:', data);
       } else {
-        console.log("Saved!", data);
+        console.log(isNewClient ? "Created new client!" : "Updated client!", data);
       }
     } catch (err) {
       console.error("Error saving user:", err);

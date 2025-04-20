@@ -37,3 +37,22 @@ export async function DELETE(req: Request) {
   if (error) return NextResponse.json({ error }, { status: 500 });
   return NextResponse.json({ success: true }, { status: 200 });
 }
+
+// Handle PUT requests
+export async function PUT(req: Request) {
+  const supabase = await createClient();
+
+  const updatedData = await req.json();
+  const id = updatedData.id;
+
+  const { error } = await supabase
+    .from('Client')
+    .update(updatedData)
+    .eq('id', id);
+
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+
+  return NextResponse.json({ message: 'Client updated successfully' });
+}
