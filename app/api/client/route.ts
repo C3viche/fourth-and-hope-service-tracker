@@ -1,9 +1,10 @@
-import { supabase } from '@/lib/supabase';
+import { createClient } from '@/utils/supabase/server';
 import { NextResponse } from 'next/server';
 import { v4 as uuidv4 } from 'uuid';
 
 // Handle GET requests
 export async function GET() {
+  const supabase = await createClient();
   const { data, error } = await supabase.from('Client').select('*'); // We'll update this later
   if (error) return NextResponse.json({ error }, { status: 500 });
   return NextResponse.json(data, { status: 200 });
@@ -11,6 +12,7 @@ export async function GET() {
 
 // Handle POST requests
 export async function POST(req: Request) {
+  const supabase = await createClient();
   const body = await req.json();
   const { name, pronunciation, age_group, sex, ethnicity, language, stay_type, notes } = body;
 
