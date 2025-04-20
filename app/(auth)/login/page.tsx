@@ -30,12 +30,7 @@ export default function LoginPage() {
   return (
     <div className={styles.page}>
       <h1>Sign in</h1>
-      <button
-        onClick={handleLogin}
-        className={styles.button}
-      >
-        <LoginCard />
-      </button>
+      <LoginCard handleLogin={handleLogin} />
     </div>
   );
 }

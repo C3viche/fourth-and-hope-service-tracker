@@ -4,24 +4,22 @@ import { useState } from "react"
 import { Loader2 } from "lucide-react"
 import styles from "./LoginCard.module.scss"
 
-export default function LoginCard() {
+export default function LoginCard({ handleLogin }: { handleLogin: () => void }) {
   const [isLoading, setIsLoading] = useState<{
     google: boolean
-    github: boolean
-    twitter: boolean
+    // github: boolean
+    // twitter: boolean
   }>({
     google: false,
-    github: false,
-    twitter: false,
+    // github: false,
+    // twitter: false,
   })
 
   const handleOAuthLogin = (provider: "google" | "github" | "twitter") => {
     setIsLoading({ ...isLoading, [provider]: true })
 
-    // Simulate OAuth login - replace with actual OAuth implementation
-    setTimeout(() => {
-      setIsLoading({ ...isLoading, [provider]: false })
-    }, 2000)
+    handleLogin()
+    setIsLoading({ ...isLoading, [provider]: false });
   }
 
   return (
