@@ -6,7 +6,7 @@ import Image from 'next/image';
 import default_profile from "../../../public/default_profile.png";
 
 export type User = {
-  id: number;
+  id: string;
   name: string;
   pronunciation: string;
   age_group: string;
@@ -15,7 +15,7 @@ export type User = {
   language: string;
   stay_type: string;
   notes: string;
-  date_added: Date;
+  date_added: Date | string;
 };
 
 type UserCardProps = {
