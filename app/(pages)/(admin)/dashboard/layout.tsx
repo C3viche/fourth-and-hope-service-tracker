@@ -4,10 +4,6 @@ import { createClient } from '@/utils/supabase/server';
 import styles from './layout.module.scss'
 import GeminiBox from '@/app/(components)/gemini-box/gemini-box';
 
-import { motion, AnimatePresence } from 'framer-motion';
-
-
-
 const Dashboardlayout = async({ children }: { children: React.ReactNode }) => {
   const supabase = await createClient(); // already scoped to the current request
 
@@ -73,9 +69,6 @@ console.log("HI");
   // if you want to count logs by age group, gender, etc., you can access log.client.age, log.client.gender, etc.
   const filteredLogs = logsWithClientInfo?.filter(log => log.client.ethnicity === 'Chinese');
 
- 
-
-
   return (
     <main className={styles.page}>
 
@@ -86,45 +79,44 @@ console.log("HI");
               <div className={styles.spotlightElement}>
                 <GeminiBox/>
               </div>
-                <div className={styles.spotlightElement}>
-                    <h3>Demographic Data</h3>
-                    {/* I just printed the logs here but you can take this and input to charts! */}
-                    <h3>All Logs</h3>
+              <div className={styles.spotlightElement}>
+                  <h3>Demographic Data</h3>
+                  {/* I just printed the logs here but you can take this and input to charts! */}
+                  <h3>All Logs</h3>
                       <ul>
-                        {logsWithClientInfo?.map(log => (
+                      {logsWithClientInfo?.map(log => (
                           <li key={log.id}>
-                            {log.client
+                          {log.client
                               ? <>Age_group: {log.client.age_group}, Sex: {log.client.sex}</>
                               : <>No client info found for ID: {log.client_id}</>
-                            }
+                          }
                           </li>
-                        ))}
+                      ))}
                       </ul>
 
                       <h3>Sorted Logs (Newest First)</h3>
                       <ul>
-                        {sortedLogs?.map(log => (
+                      {sortedLogs?.map(log => (
                           <li key={log.id}>
-                            {/* you kind of have to alternate between log.client. or just log. */}
-                            {log.client.name} : {log.service} - {log.date} 
+                          {/* you kind of have to alternate between log.client. or just log. */}
+                          {log.client.name} : {log.service} - {log.date} 
                           </li>
-                        ))}
+                      ))}
                       </ul>
 
                       <h3>Filtered Logs (Filter logs by Chinese)</h3>
                       <ul>
-                        {filteredLogs?.map(log => (
+                      {filteredLogs?.map(log => (
                           <li key={log.id}>
-                            {log.client.name} : {log.service} - {log.date}
+                          {log.client.name} : {log.service} - {log.date}
                           </li>
-                        ))}
+                      ))}
                       </ul>
 
-                    {/* <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore porro sint iure accusamus numquam maiores praesentium, error sequi eum exercitationem aspernatur provident quasi dolorum perferendis quos adipisci corrupti aperiam assumenda?</p> */}
-                </div>
+                  {/* <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore porro sint iure accusamus numquam maiores praesentium, error sequi eum exercitationem aspernatur provident quasi dolorum perferendis quos adipisci corrupti aperiam assumenda?</p> */}
+              </div>
             </div>
         </div>
-      </div>
 
       {/* Let page.tsx handle tabs and content now */}
       <div className={styles.services}>
