@@ -22,11 +22,10 @@ export default function Sidebar({
   const router = useRouter();
   const supabase = createClient();
 
-  const services = ["food", "shelter", "hygiene"];
-
   // Define navLinks, only include Dashboard if user is admin
   const navLinks: { name: string; href: string }[] = [
-    isAdmin && { name: "Dashboard", href: `/dashboard/${services[0]}` },
+    { name: "Home", href: "/" },
+    isAdmin && { name: "Dashboard", href: `/dashboard` },
     { name: "Log", href: "/logger" },
     { name: "Add Clients", href: "/add-client" },
   ].filter((link): link is { name: string; href: string } => link !== false); // Type guard to filter out false
@@ -39,6 +38,13 @@ export default function Sidebar({
     <nav className={styles.background}>
       <div className={styles.sidebar}>
         <div className={styles.topSection}>
+          <Image 
+            src={"/headerlogo.svg"}
+            alt={"logo"}
+            width={150}
+            height={80}
+            style={{ marginBottom: "32px" }}
+          />
           <Image
             src={avatarUrl || default_profile} // fallback to a default image if avatarUrl is unavailable
             alt="profile"
