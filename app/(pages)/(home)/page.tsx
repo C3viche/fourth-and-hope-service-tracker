@@ -1,21 +1,11 @@
 // import styles from "./page.module.scss";
-import DemographicsChart from "@/app/(components)/DemographicsChart/DemographicsChart";
+import styles from "./page.module.scss";
+import Sidebar from "../../(components)/sidebar/sidebar"
 
 const Home = () => {
   return (
-    <div>
-        <DemographicsChart
-            width={300}
-            height={400}
-            demographic={"age"}
-            dataValues={[19, 26, 55, 20]}
-        />
-        <DemographicsChart
-            width={300}
-            height={400}
-            demographic="sex"
-            dataValues={[19, 26, 55]}
-        />
+    <div className={styles.page}>
+      <Sidebar/>
     </div>
   );
 }
