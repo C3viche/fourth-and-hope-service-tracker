@@ -1,8 +1,8 @@
-'use client';
-import { useState } from 'react';
-import styles from './addClient.module.scss';
-import { User } from './UserCard';
-import Image from 'next/image';
+"use client";
+import { useState, useEffect, useRef } from "react";
+import styles from "./addClient.module.scss";
+import { User } from "./UserCard";
+import Image from "next/image";
 import default_profile from "../../../public/default_profile.png";
 
 type AddUserModalProps = {
@@ -12,7 +12,12 @@ type AddUserModalProps = {
   userData?: User;
 };
 
-export default function AddUserModal({ onClose, onSave, onDelete, userData }: AddUserModalProps) {
+export default function AddUserModal({
+  onClose,
+  onSave,
+  onDelete,
+  userData,
+}: AddUserModalProps) {
   const [formData, setFormData] = useState<User>(
     userData || {
       id: Date.now(),
@@ -28,15 +33,48 @@ export default function AddUserModal({ onClose, onSave, onDelete, userData }: Ad
     }
   );
 
+  const [isVisible, setIsVisible] = useState(true);
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const handleClose = () => {
+    setIsVisible(false);
+    setTimeout(() => {
+      onClose();
+    }, 300); // match fade-out duration
+  };
+
+  const handleClickOutside = (e: MouseEvent) => {
+    if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
+      handleClose();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   const handleChange = (field: keyof User, value: string) => {
     setFormData({ ...formData, [field]: value });
   };
 
   return (
-    <div className={styles.modalOverlay}>
+    <div
+      className={`${styles.modalOverlay} ${
+        isVisible ? styles.fadeIn : styles.fadeOut
+      }`}
+    >
       <div className={styles.modal}>
-      <Image src={default_profile} alt="profile" width={50} height={50} style={{marginBottom: "0.5rem"}}/>
-      <form className={styles.form}>
+        <Image
+          src={default_profile}
+          alt="profile"
+          width={50}
+          height={50}
+          style={{ marginBottom: "0.5rem" }}
+        />
+        <form className={styles.form}>
           <div className={styles.row}>
             <div className={styles.inputGroup}>
               <label>Name</label>
@@ -58,11 +96,15 @@ export default function AddUserModal({ onClose, onSave, onDelete, userData }: Ad
           <div className={styles.row}>
             <div className={styles.inputGroup}>
               <label>Age Group</label>
-              <input
-                placeholder="Age Group"
+              <select
                 value={formData.age_group}
                 onChange={(e) => handleChange("age_group", e.target.value)}
-              />
+              >
+                <option value="0-17">0 - 17</option>
+                <option value="18-39">18 - 39</option>
+                <option value="40-59">40 - 59</option>
+                <option value="60+">60 +</option>
+              </select>
             </div>
             <div className={styles.inputGroup}>
               <label>Sex</label>
@@ -111,9 +153,20 @@ export default function AddUserModal({ onClose, onSave, onDelete, userData }: Ad
           </div>
         </form>
         <div className={styles.modalButtons}>
-          <button onClick={onClose} className={styles.closeButton}>Cancel</button>
-          {onDelete && <button onClick={onDelete} className={styles.closeButton}>Delete</button>}
-          <button onClick={() => onSave(formData)} className={styles.saveButton}>Save</button>
+          <button onClick={handleClose} className={styles.closeButton}>
+            Cancel
+          </button>
+          {onDelete && (
+            <button onClick={handleClose} className={styles.closeButton}>
+              Delete
+            </button>
+          )}
+          <button
+            onClick={() => onSave(formData)}
+            className={styles.saveButton}
+          >
+            Save
+          </button>
         </div>
       </div>
     </div>
