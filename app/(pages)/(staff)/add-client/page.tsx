@@ -1,6 +1,5 @@
 import AddUsersLayout from '../../../(components)/add-client/AddUsersLayout';
 import UserCard from '../../../(components)/add-client/UserCard';
-import Sidebar from '@/app/(components)/sidebar/sidebar';
 const dummyUsers = [
     {
       id: 1,
@@ -54,12 +53,12 @@ export default function AddUsersPage() {
   return (
     // <div>
     // 
-<AddUsersLayout>
-  <UserCard isAddButton />
-  {dummyUsers.map((user, i) => (
-    <UserCard key={user.id} user={user} />
-  ))}
-</AddUsersLayout>
+    <AddUsersLayout>
+    <UserCard isAddButton />
+    {dummyUsers.map((user) => (
+        <UserCard key={user.id} user={user} />
+    ))}
+    </AddUsersLayout>
     // </div>
   );
 }
