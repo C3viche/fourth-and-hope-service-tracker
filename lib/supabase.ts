@@ -16,7 +16,7 @@ export type Client = {
     language: string;
     stay_type: string;
     notes: string;
-    date_added: Date;
+    date_added: Date | string;
   };
   
   export type Log = {
