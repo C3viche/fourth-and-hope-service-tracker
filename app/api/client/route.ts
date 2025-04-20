@@ -2,10 +2,24 @@ import { createClient } from '@/utils/supabase/server';
 import { NextResponse } from 'next/server';
 import { v4 as uuidv4 } from 'uuid';
 
+
 // Handle GET requests
-export async function GET() {
+export async function GET(req: Request) {
   const supabase = await createClient();
-  const { data, error } = await supabase.from('Client').select('*'); // We'll update this later
+  const { searchParams } = new URL(req.url);
+  const query = searchParams.get('q');
+  let supabaseQuery = supabase.from('Client').select('*');
+
+
+  console.log("The request is: ", query);
+  if (query) {
+    // supabaseQuery = supabaseQuery.ilike('name', query);
+    supabaseQuery = supabaseQuery.ilike('name', `%${query}%`);
+  }
+
+  const { data, error } = await supabaseQuery;
+
+  // const { data, error } = await supabase.from('Client').select('*'); // We'll update this later
   if (error) return NextResponse.json({ error }, { status: 500 });
   return NextResponse.json(data, { status: 200 });
 }

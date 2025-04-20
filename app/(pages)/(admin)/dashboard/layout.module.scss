@@ -5,6 +5,8 @@
     padding: var(--page-padding);
     flex-direction: column;
     gap: var(--element-spacing);
+    width: 100%;
+    max-width: 100%;
 }
 
 .spotlight {

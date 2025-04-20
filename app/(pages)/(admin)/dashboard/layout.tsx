@@ -4,11 +4,8 @@ import { createClient } from '@/utils/supabase/server';
 import styles from './layout.module.scss'
 import GeminiBox from '@/app/(components)/gemini-box/gemini-box';
 
-import { motion, AnimatePresence } from 'framer-motion';
 
-
-
-const Dashboardlayout = async({ children }: { children: React.ReactNode }) => {
+const Dashboard = async({ children }: { children: React.ReactNode }) => {
   const supabase = await createClient(); // already scoped to the current request
 
   const {
@@ -77,64 +74,60 @@ console.log("HI");
 
 
   return (
-  <main className={styles.page}>
-    <h1>Dashboard</h1>
+    <main className={styles.page}>
+        <h1>Dashboard</h1>
+        <div className={styles.spotlight}>
+            <h2>Spotlight</h2>
+            <div className={styles.spotlightElements}>
+              <div className={styles.spotlightElement}>
+                <GeminiBox/>
+              </div>
+                <div className={styles.spotlightElement}>
+                    <h3>Demographic Data</h3>
+                    {/* I just printed the logs here but you can take this and input to charts! */}
+                    <h3>All Logs</h3>
+                      <ul>
+                        {logsWithClientInfo?.map(log => (
+                          <li key={log.id}>
+                            {log.client
+                              ? <>Age_group: {log.client.age_group}, Sex: {log.client.sex}</>
+                              : <>No client info found for ID: {log.client_id}</>
+                            }
+                          </li>
+                        ))}
+                      </ul>
 
-    <div className={styles.spotlight}>
-      <h2>Spotlight</h2>
-      <div className={styles.spotlightElements}>
-        <div className={styles.spotlightElement}>
-          <GeminiBox />
+                      <h3>Sorted Logs (Newest First)</h3>
+                      <ul>
+                        {sortedLogs?.map(log => (
+                          <li key={log.id}>
+                            {/* you kind of have to alternate between log.client. or just log. */}
+                            {log.client.name} : {log.service} - {log.date} 
+                          </li>
+                        ))}
+                      </ul>
+
+                      <h3>Filtered Logs (Filter logs by Chinese)</h3>
+                      <ul>
+                        {filteredLogs?.map(log => (
+                          <li key={log.id}>
+                            {log.client.name} : {log.service} - {log.date}
+                          </li>
+                        ))}
+                      </ul>
+
+                    {/* <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore porro sint iure accusamus numquam maiores praesentium, error sequi eum exercitationem aspernatur provident quasi dolorum perferendis quos adipisci corrupti aperiam assumenda?</p> */}
+                </div>
+            </div>
         </div>
-
-        <div className={styles.spotlightElement}>
-          <h3>Demographic Data</h3>
-          {/* I just printed the logs here but you can take this and input to charts! */}
-
-          <h3>All Logs</h3>
-          <ul>
-            {logsWithClientInfo?.map((log) => (
-              <li key={log.id}>
-                {log.client ? (
-                  <>
-                    Age_group: {log.client.age_group}, Sex: {log.client.sex}
-                  </>
-                ) : (
-                  <>No client info found for ID: {log.client_id}</>
-                )}
-              </li>
-            ))}
-          </ul>
-
-          <h3>Sorted Logs (Newest First)</h3>
-          <ul>
-            {sortedLogs?.map((log) => (
-              <li key={log.id}>
-                {log.client.name} : {log.service} - {log.date}
-              </li>
-            ))}
-          </ul>
-
-          <h3>Filtered Logs (Filter logs by Chinese)</h3>
-          <ul>
-            {filteredLogs?.map((log) => (
-              <li key={log.id}>
-                {log.client.name} : {log.service} - {log.date}
-              </li>
-            ))}
-          </ul>
+        <div className={styles.services}>
+            <h2>Services</h2>
+            <div className={styles.tabs}>
+                {children} {/* This is where tab content loads */}
+            </div>
         </div>
-      </div>
-    </div>
-
-    {/* Let page.tsx handle tabs and content now */}
-    <div className={styles.services}>
-      <h2>Services</h2>
-      <div className={styles.tabs}>{children}</div>
-    </div>
-  </main>
-);
-
+    </main>
+  );
 }
 
-export default Dashboardlayout;
+export default Dashboard;
