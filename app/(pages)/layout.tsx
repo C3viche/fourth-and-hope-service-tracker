@@ -1,4 +1,3 @@
-"use client";
 // app/components/layout/Sidebar.tsx
 import Sidebar from "@/app/(components)/sidebar/sidebar";
 import { redirect } from "next/navigation";

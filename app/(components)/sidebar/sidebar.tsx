@@ -3,8 +3,9 @@
 import styles from "./sidebar.module.scss";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from 'next/navigation'; // App Router
 import default_profile from "../../../public/default_profile.png";
+import { createClient } from '@/utils/supabase/client';
 
 interface SidebarProps {
   isAdmin?: boolean;
@@ -18,6 +19,9 @@ export default function Sidebar({
   avatarUrl,
 }: SidebarProps) {
   const pathname = usePathname();
+  const router = useRouter();
+  const supabase = createClient();
+
   const services = ["food", "shelter", "hygiene"];
 
   // Define navLinks, only include Dashboard if user is admin
@@ -27,6 +31,10 @@ export default function Sidebar({
     { name: "Add Clients", href: "/add-client" },
   ].filter((link): link is { name: string; href: string } => link !== false); // Type guard to filter out false
 
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    router.push('/login');
+  }
   return (
     <nav className={styles.background}>
       <div className={styles.sidebar}>
@@ -54,15 +62,15 @@ export default function Sidebar({
           </ul>
         </div>
 
-        <div className={styles.logout}>Log Out</div>
+        <div className={styles.logout} onClick={handleLogout}>Log Out</div>
       </div>
 
-      <div
+      {/* <div
         className={styles.logout}
         //onClick={handleLogout}
       >
         Log Out
-      </div>
+      </div> */}
     </nav>
   );
 }
