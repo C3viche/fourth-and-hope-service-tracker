@@ -23,6 +23,7 @@ export type Client = {
     id: string;
     service: string;
     client_id: string;
-    date: Date;
+    comments: string;
+    date: Date | string;
     data: JSON;
   };

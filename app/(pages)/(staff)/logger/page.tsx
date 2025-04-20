@@ -1,13 +1,28 @@
 'use client';
 import LogTable from './LogTable';
 import styles from './page.module.scss';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Client } from '@/lib/supabase';
 
 export default function LogsContainer() {
-  const [logs, setLogs] = useState([{ id: 1, title: 'Daily Shower Log' }]);
-  const [nextId, setNextId] = useState(2);
+  const [logs, setLogs] = useState([{ id: "", title: 'Daily Shower Log' }]);
+  const [nextId, setNextId] = useState("");
+  const [users, setUsers] = useState<string[]>([]);
 
-  const users = ['Alice Smith', 'Bob Jones', 'Charlie Rose'];
+  useEffect(() => {
+    const fetchClients = async () => {
+      try {
+        const res = await fetch('/api/client');
+        const data = await res.json();
+        const names = data.map((client: Client) => `${client.name}`);
+        setUsers(names);
+      } catch (error) {
+        console.error('Failed to fetch clients:', error);
+      }
+    };
+
+    fetchClients();
+  }, []);
 
   const addNewLog = () => {
     const title = prompt('Enter a title for the new log') || `New Log ${nextId}`;
@@ -15,8 +30,25 @@ export default function LogsContainer() {
     setNextId(nextId + 1);
   };
 
-  const deleteLog = (id: number) => {
+  const deleteLog = async (id: string) => {
+    console.log("CLICKED DELETE");
     setLogs(logs.filter(entry => entry.id !== id));
+    try {
+      const res = await fetch('/api/service-log', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id }),
+      });
+  
+      if (!res.ok) {
+        console.error('Failed to delete log');
+        return;
+      }
+  
+      
+    } catch (err) {
+      console.error('Error deleting log:', err);
+    }
   };
 
   return (

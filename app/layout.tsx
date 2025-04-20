@@ -21,9 +21,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${beVietnamPro.variable}`}>
+      <body className={`${beVietnamPro.variable}`}> 
         {children}
       </body>
     </html>
   );
 }
+// the body classname here is causing the hydration error!
