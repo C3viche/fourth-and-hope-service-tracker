@@ -6,6 +6,7 @@ import GeminiBox from '@/app/(components)/gemini-box/gemini-box';
 
 
 const Dashboard = async({ children }: { children: React.ReactNode }) => {
+
   const supabase = await createClient(); // already scoped to the current request
 
   const {
@@ -124,7 +125,8 @@ console.log("HI");
             <h2>Services</h2>
             <div className={styles.tabs}>
                 {children} {/* This is where tab content loads */}
-            </div>
+        </div>
+
         </div>
     </main>
   );
