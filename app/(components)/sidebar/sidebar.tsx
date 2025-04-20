@@ -30,6 +30,7 @@ export default function Sidebar({
     { name: "Add Clients", href: "/add-client" },
   ].filter((link): link is { name: string; href: string } => link !== false); // Type guard to filter out false
 
+
   const handleLogout = async () => {
     await supabase.auth.signOut();
     router.push('/login');
