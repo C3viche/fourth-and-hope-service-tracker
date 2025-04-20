@@ -39,6 +39,8 @@
     padding: var(--card-padding);
     border-radius: var(--card-border-radius);
     flex-grow: 1;
+    max-height: 500px;
+    overflow: auto;
 }
 
 .infoSpotlightElement {
@@ -47,6 +49,9 @@
     border-radius: var(--card-border-radius);
     // width: 100%;
     flex-grow: 2;
+    max-height: 500px;
+    min-width: 50%;
+    overflow: auto;
 }
 
 .services {

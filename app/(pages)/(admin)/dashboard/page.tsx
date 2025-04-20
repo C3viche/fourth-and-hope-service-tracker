@@ -37,7 +37,7 @@ const tabs = ['Age', 'Sex', 'Ethnicity', 'Language', 'Stay Type'];
 
 
 export default function DashboardPage() {
-    const [activeTab, setActiveTab] = useState('Showers');
+    const [activeTab, setActiveTab] = useState('Age');
   
     const renderContent = (tab: string) => {
       switch (tab) {
