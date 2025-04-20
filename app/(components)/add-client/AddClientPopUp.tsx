@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styles from './addClient.module.scss';
 import { User } from './UserCard';
 import Image from 'next/image';
@@ -28,12 +28,38 @@ export default function AddUserModal({ onClose, onSave, onDelete, userData }: Ad
     }
   );
 
+  const [isVisible, setIsVisible] = useState(true);
+  const modalRef = useRef<HTMLDivElement>(null);
+
+
+  const handleClose = () => {
+    setIsVisible(false);
+    setTimeout(() => {
+      onClose();
+    }, 300); // match fade-out duration
+  };
+
+
+  const handleClickOutside = (e: MouseEvent) => {
+    if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
+      handleClose();
+    }
+  };
+
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   const handleChange = (field: keyof User, value: string) => {
     setFormData({ ...formData, [field]: value });
   };
 
   return (
-    <div className={styles.modalOverlay}>
+    <div className={`${styles.modalOverlay} ${isVisible ? styles.fadeIn : styles.fadeOut}`}>
       <div className={styles.modal}>
       <Image src={default_profile} alt="profile" width={50} height={50} style={{marginBottom: "0.5rem"}}/>
       <form className={styles.form}>
@@ -111,8 +137,8 @@ export default function AddUserModal({ onClose, onSave, onDelete, userData }: Ad
           </div>
         </form>
         <div className={styles.modalButtons}>
-          <button onClick={onClose} className={styles.closeButton}>Cancel</button>
-          {onDelete && <button onClick={onDelete} className={styles.closeButton}>Delete</button>}
+          <button onClick={handleClose} className={styles.closeButton}>Cancel</button>
+          {onDelete && <button onClick={handleClose} className={styles.closeButton}>Delete</button>}
           <button onClick={() => onSave(formData)} className={styles.saveButton}>Save</button>
         </div>
       </div>

@@ -5,7 +5,7 @@ import Sidebar from "../../(components)/sidebar/sidebar"
 const Home = () => {
   return (
     <div className={styles.page}>
-      <Sidebar/>
+      {/* <Sidebar/> */}
     </div>
   );
 }

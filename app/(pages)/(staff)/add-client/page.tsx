@@ -1,5 +1,8 @@
+'use client';
+
 import AddUsersLayout from '../../../(components)/add-client/AddUsersLayout';
 import UserCard from '../../../(components)/add-client/UserCard';
+
 const dummyUsers = [
     {
       id: 1,
@@ -14,7 +17,7 @@ const dummyUsers = [
       date_added: new Date("2024-12-12"),
     },
     {
-        id: 1,
+        id: 2,
         name: "Joseph Doe",
         pronunciation: "Jay-n Doh",
         age_group: "18-39",
@@ -25,7 +28,7 @@ const dummyUsers = [
         notes: "Requires medication every morning.",
         date_added: new Date("2024-12-12"),
       },{
-        id: 1,
+        id: 3,
         name: "Janie Doe",
         pronunciation: "Jay-n Doh",
         age_group: "18-39",
@@ -36,7 +39,7 @@ const dummyUsers = [
         notes: "Requires medication every morning.",
         date_added: new Date("2024-12-12"),
       },{
-        id: 1,
+        id: 4,
         name: "Jacob Doe",
         pronunciation: "Jay-n Doh",
         age_group: "18-39",
