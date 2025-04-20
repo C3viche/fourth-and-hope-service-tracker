@@ -1,10 +1,6 @@
 'use client';
-import { useParams } from 'next/navigation';
 import { useState } from 'react';
 import styles from './page.module.scss';
-
-import { usePathname } from 'next/navigation';
-import Link from 'next/link';
 
 import { motion, AnimatePresence } from 'framer-motion';
 
