@@ -10,7 +10,8 @@ type DemographicChartData = {
     width: number,
     height: number,
     demographic: string,
-    dataValues: number[]
+    dataValues: number[],
+    title?: string
 }
 
 const colors = [
@@ -34,7 +35,7 @@ const demographics = {
     stayType: {labels: ["Overnight", "Regular"], title: "Stay Type"},
 }
 
-const DemographicsChart = ({ width, height, demographic, dataValues }: DemographicChartData) => {
+const DemographicsChart = ({ width, height, demographic, dataValues, title }: DemographicChartData) => {
     
     const demographicType = demographics[demographic as keyof typeof demographics];
     const colorScheme = colors.slice(0, demographicType.labels.length);
@@ -49,7 +50,8 @@ const DemographicsChart = ({ width, height, demographic, dataValues }: Demograph
     }];
     
     const layout: Partial<Plotly.Layout> = {
-        width: width, height: height, title: {text: demographicType.title}
+        width: width, height: height, title: {text: title || demographicType.title},
+        paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)'
     }
     
     return (
