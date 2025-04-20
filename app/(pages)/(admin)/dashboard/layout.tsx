@@ -82,7 +82,7 @@ const Dashboard = async({ children }: { children: React.ReactNode }) => {
               <div className={styles.infoSpotlightElement}>
                   <h3>Demographic Data</h3>
                   {/* I just printed the logs here but you can take this and input to charts! */}
-                  <h3>All Logs</h3>
+                  <h4>All Logs</h4>
                       <ul>
                       {logsWithClientInfo?.map(log => (
                           <li key={log.id}>
@@ -94,7 +94,7 @@ const Dashboard = async({ children }: { children: React.ReactNode }) => {
                       ))}
                       </ul>
 
-                      <h3>Sorted Logs (Newest First)</h3>
+                      <h4>Sorted Logs (Newest First)</h4>
                       <ul>
                       {sortedLogs?.map(log => (
                           <li key={log.id}>
@@ -104,7 +104,7 @@ const Dashboard = async({ children }: { children: React.ReactNode }) => {
                       ))}
                       </ul>
 
-                      <h3>Filtered Logs (Filter logs by Chinese)</h3>
+                      <h4>Filtered Logs (Filter logs by Chinese)</h4>
                       <ul>
                       {filteredLogs?.map(log => (
                           <li key={log.id}>
