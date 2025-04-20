@@ -1,5 +1,8 @@
+'use client';
+
 import AddUsersLayout from '../../../(components)/add-client/AddUsersLayout';
 import UserCard from '../../../(components)/add-client/UserCard';
+
 const dummyUsers = [
     {
       id: 1,
