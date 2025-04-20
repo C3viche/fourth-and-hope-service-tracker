@@ -20,7 +20,7 @@ export default function Sidebar() {
   const services = ["food", "shelter", "hygiene"];
   const navLinks = [
 
-    { name: 'Dashboard', href: `/dashboard/${services[0]}` },
+    { name: 'Dashboard', href: `/dashboard/` },
     { name: 'Log', href: '/logger' },
     { name: 'Users', href: '/add-client' },
   ];
