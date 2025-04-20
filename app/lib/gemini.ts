@@ -3,6 +3,7 @@ import { Chat, GoogleGenAI } from "@google/genai";
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 const services: string[] = [];
+const numInsights = 10;
 
 const context = `    
     Role: {
@@ -20,7 +21,7 @@ const context = `
 `;
 
 const finalInsightsPrompt = `
-    Given the summaries you generated, IN LESS THAN 200 WORDS generate a short insightful description regarding trends, and recommendations.
+    Given the summaries you generated, IN LESS THAN 200 WORDS generate a DIFFERENT short insightful description regarding trends, and recommendations.
     based behavioral anomalies across services to provide to the Fourth and Hope team.
 `
 
@@ -58,6 +59,8 @@ const generateInsights = (chat: Chat) => {
 }
 
 export const getServicesAnalysis = async () => {
+    const responses: Array<string | undefined> = new Array(numInsights);
+    
     // Create chat with no history
     const chat = ai.chats.create({
         model: "gemini-2.0-flash",
@@ -68,10 +71,12 @@ export const getServicesAnalysis = async () => {
             },
         ],
     })
-
+    
     generateInsights(chat);
 
-    const response = await sendGeminiChat(chat, finalInsightsPrompt);
+    for (let i = 0; i < numInsights; i++) {
+        responses[i] = await sendGeminiChat(chat, finalInsightsPrompt);
+    }
 
-    return response;
+    return responses;
 }
