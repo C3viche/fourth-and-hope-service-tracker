@@ -1,6 +1,6 @@
 "use client";
 import styles from "./page.module.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IoTrashBinOutline } from "react-icons/io5";
 
 type LogEntry = {
@@ -26,6 +26,26 @@ export default function LogTable({
   deleteLog,
 }: LogTableProps) {
   const [entries, setEntries] = useState<LogEntry[]>([]);
+
+  useEffect(() => {
+    const fetchLogs = async () => {
+      try {
+        console.log(title);
+        const res = await fetch(`/api/service-log?service=${encodeURIComponent('shower')}`);
+        const data = await res.json();
+        if (res.ok) {
+          console.log(data);
+          setEntries(data);
+        } else {
+          console.error("Error fetching logs:", data.error);
+        }
+      } catch (err) {
+        console.error("Failed to fetch logs:", err);
+      }
+    };
+
+    fetchLogs();
+  }, [title]);
 
   const handleAddEntry = () => {
     setEntries([
@@ -74,8 +94,8 @@ export default function LogTable({
               value={entry.service}
               onChange={(e) => updateEntry(entry.id, "service", e.target.value)}
             >
-              {users.map((user) => (
-                <option key={user} value={user}>
+              {users.map((user, idx) => (
+                <option key={idx} value={user}>
                   {user}
                 </option>
               ))}
