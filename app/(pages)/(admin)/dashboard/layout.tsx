@@ -4,9 +4,6 @@ import { createClient } from '@/utils/supabase/server';
 import styles from './layout.module.scss'
 import GeminiBox from '@/app/(components)/gemini-box/gemini-box';
 
-import { motion, AnimatePresence } from 'framer-motion';
-
-
 
 const Dashboardlayout = async({ children }: { children: React.ReactNode }) => {
   const supabase = await createClient(); // already scoped to the current request
@@ -124,7 +121,6 @@ console.log("HI");
                 </div>
             </div>
         </div>
-      </div>
 
       {/* Let page.tsx handle tabs and content now */}
       <div className={styles.services}>
