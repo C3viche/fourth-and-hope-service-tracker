@@ -1,0 +1,13 @@
+@use "@/app/mixins.scss";
+
+.page {
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+    align-items: center;
+    
+    padding: var(--page-padding);
+    width: 100vw;
+    min-height: 100vh;
+    height: 100%;
+}

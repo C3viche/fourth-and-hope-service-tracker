@@ -4,6 +4,7 @@ import { createClient } from '@/utils/supabase/client';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import styles from './page.module.scss';
+import LoginCard from '@/app/(components)/LoginCard/LoginCard';
 
 export default function LoginPage() {
   const supabase = createClient();
@@ -33,7 +34,7 @@ export default function LoginPage() {
         onClick={handleLogin}
         className={styles.button}
       >
-        Sign in with Google
+        <LoginCard />
       </button>
     </div>
   );
