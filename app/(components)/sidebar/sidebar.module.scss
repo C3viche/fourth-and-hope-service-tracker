@@ -1,0 +1,78 @@
+.sidebar {
+    position: absolute;
+    width: 15rem;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    background-color: var(--beige);
+    padding: 6rem 1rem 2rem;
+    color: var(--black);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* push logout to bottom */
+    align-items: center;
+    text-align: center;
+  }
+  
+  .topSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .name {
+    margin-top: 1rem;
+    font-style: normal;
+    align-items: center;
+  }
+  
+  .role {
+    font-style: italic;
+    font-weight: 200;
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .navList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .navList li {
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    display: block;
+    background-color: var(--white);
+  }
+  
+  .navList li a {
+    color: var(--black);
+    transition: all 0.2s ease-in-out;
+    padding: 0.5rem 2rem;
+    border-radius: 8px;
+    display: block;
+    text-decoration: none;
+  }
+  
+  .navList li a:hover {
+    background-color: var(--cornsilk);
+  }
+  
+  .active a {
+    color: var(--white);
+    background-color: var(--green);
+  }
+  
+  .logout {
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+    background: #FAFAFA;
+    cursor: pointer;
+    background-color: var(--cornsilk);
+    border-radius: 8px;
+
+
+  }
