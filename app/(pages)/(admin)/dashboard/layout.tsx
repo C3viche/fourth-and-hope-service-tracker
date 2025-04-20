@@ -4,7 +4,9 @@ import { createClient } from '@/utils/supabase/server';
 import styles from './layout.module.scss'
 import GeminiBox from '@/app/(components)/gemini-box/gemini-box';
 
-const Dashboardlayout = async({ children }: { children: React.ReactNode }) => {
+
+const Dashboard = async({ children }: { children: React.ReactNode }) => {
+
   const supabase = await createClient(); // already scoped to the current request
 
   const {
@@ -71,7 +73,6 @@ console.log("HI");
 
   return (
     <main className={styles.page}>
-
         <h1>Dashboard</h1>
         <div className={styles.spotlight}>
             <h2>Spotlight</h2>
@@ -117,16 +118,15 @@ console.log("HI");
               </div>
             </div>
         </div>
-
-      {/* Let page.tsx handle tabs and content now */}
-      <div className={styles.services}>
-        <h2>Services</h2>
-        <div className={styles.tabs}>
-        {children}
+        <div className={styles.services}>
+            <h2>Services</h2>
+            <div className={styles.tabs}>
+                {children} {/* This is where tab content loads */}
         </div>
-      </div>
+
+        </div>
     </main>
   );
 }
 
-export default Dashboardlayout;
+export default Dashboard;
