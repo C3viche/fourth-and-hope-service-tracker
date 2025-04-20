@@ -24,12 +24,14 @@ export default function Sidebar({
 
   const services = ["food", "shelter", "hygiene"];
 
+
   // Define navLinks, only include Dashboard if user is admin
   const navLinks: { name: string; href: string }[] = [
     isAdmin && { name: "Dashboard", href: `/dashboard/${services[0]}` },
     { name: "Log", href: "/logger" },
     { name: "Add Clients", href: "/add-client" },
   ].filter((link): link is { name: string; href: string } => link !== false); // Type guard to filter out false
+
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
