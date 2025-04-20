@@ -1,4 +1,5 @@
-// pages/staff/logger.tsx
+'use client';
+
 import { withAuth } from '@/lib/withAuth';
 
 function LoggerPage() {

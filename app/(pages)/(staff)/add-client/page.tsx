@@ -1,4 +1,5 @@
-// pages/staff/add-client.tsx
+'use client';
+
 import { withAuth } from '@/lib/withAuth';
 
 function AddClientPage() {

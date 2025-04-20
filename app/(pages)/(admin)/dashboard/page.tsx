@@ -1,4 +1,5 @@
-// pages/admin/dashboard.tsx
+'use client';
+
 import { withAuth } from '@/lib/withAuth';
 
 function AdminDashboard() {
