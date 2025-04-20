@@ -21,7 +21,7 @@ export default function ServicePage() {
             ))}
         </div>
         <div className={styles.content}>
-            <h2>Content for {serviceName} tab</h2>
+            <h3>Content for {serviceName} tab</h3>
             <div>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint cumque recusandae voluptatem sequi accusantium nostrum adipisci, sit libero commodi incidunt fuga consectetur, enim asperiores totam nobis odio. Ea, voluptas labore.
             </div>
