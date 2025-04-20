@@ -20,7 +20,7 @@ export default function Sidebar() {
   const navLinks = [
     { name: 'Dashboard', href: '/home' },
     { name: 'Log', href: '/logger' },
-    { name: 'Users', href: '/staff' },
+    { name: 'Users', href: '/add-client' },
   ];
 
   return (
