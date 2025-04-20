@@ -3,6 +3,7 @@
 import { createClient } from '@/utils/supabase/client';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import styles from './page.module.scss';
 
 export default function LoginPage() {
   const supabase = createClient();
@@ -17,7 +18,7 @@ export default function LoginPage() {
       }
     };
     checkSession();
-  }, []);
+  }, [router, supabase.auth]);
 
   const handleLogin = async () => {
     await supabase.auth.signInWithOAuth({
@@ -26,11 +27,11 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      <h1 className="text-2xl font-bold mb-6">Sign in</h1>
+    <div className={styles.page}>
+      <h1>Sign in</h1>
       <button
         onClick={handleLogin}
-        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        className={styles.button}
       >
         Sign in with Google
       </button>

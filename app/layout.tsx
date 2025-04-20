@@ -1,10 +1,30 @@
-import './globals.scss';
+import type { Metadata } from "next";
+import "./globals.scss";
+import { Be_Vietnam_Pro } from "next/font/google";
+import Sidebar from "./(components)/sidebar/sidebar";
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+const beVietnamPro = Be_Vietnam_Pro({
+  subsets: ["latin"],
+  weight: ["400", "700", "900"],
+  variable: "--fontPrimary",
+  display: "swap",
+});
+
+export const metadata: Metadata = {
+  title: "Fourth and Hope Service Tracker",
+  description: "A centralized platform for those in need.",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="en">
-      <body>
-          {children}
+      <body className={`${beVietnamPro.variable}`}>
+        <Sidebar />
+        {children}
       </body>
     </html>
   );
