@@ -1,0 +1,19 @@
+.card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px; // limit width
+  
+  }
+  
+  .input {
+    width: 100%;
+    border: none;
+    font-size: 1rem;
+    outline: none;
+    text-align: left;
+    background-color: transparent;
+  }
+  

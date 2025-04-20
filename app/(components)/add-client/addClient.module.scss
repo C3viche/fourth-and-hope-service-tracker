@@ -146,6 +146,19 @@
   }
 }
 
+.searchBarBubble {
+  background-color: var(--green);
+  padding: 0.75rem;
+  border-radius: var(--card-border-radius);
+  display: inline-flex; 
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 1.5rem;
+
+  margin-top: 0; // ✅ this avoids shifting the layout downward
+  margin-bottom: 0.5rem; // tighter spacing between search and grid
+}
+
 
 .modalButtons {
   display: flex;
