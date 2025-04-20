@@ -1,13 +1,6 @@
-// import styles from "./page.module.scss";
+import Image from "next/image";
 import styles from "./page.module.scss";
-import Sidebar from "../../(components)/sidebar/sidebar"
 
-const Home = () => {
-  return (
-    <div className={styles.page}>
-      {/* <Sidebar/> */}
-    </div>
-  );
+export default function Home() {
+  return <div className={styles.page}>hello this is the home page</div>;
 }
-
-export default Home;

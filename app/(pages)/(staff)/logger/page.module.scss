@@ -1,5 +1,6 @@
 .page {
     padding: 2rem 3rem;
+    flex: 1;
   }
   
   .logHeader {
@@ -63,7 +64,12 @@
         border-radius: 6px;
         border: 1px solid #ccc;
       }
-  
+      .actions {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+      }
+      
       .addEntryBtn {
         margin-top: 1rem;
         background: #FAEDCD;
@@ -71,6 +77,16 @@
         padding: 0.5rem 1rem;
         border-radius: 8px;
         cursor: pointer;
+      }
+
+      .saveBtn {
+        background: var(--green);
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        color: white;
+        font-weight: 500;
       }
     }
   }
