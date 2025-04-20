@@ -6,7 +6,7 @@ export async function GET(req: Request){
     const url = new URL(req.url);
 
     const client_id = url.searchParams.get('clientid');
-    const name = url.searchParams.get('name');
+    const service = url.searchParams.get('service');
   
     let query = supabase.from('Log').select('*');
   
@@ -14,8 +14,8 @@ export async function GET(req: Request){
       query = query.eq('user_id', client_id); // make sure this matches your DB column
     }
   
-    if (name) {
-      query = query.eq('name', name);
+    if (service) {
+      query = query.eq('service', service);
     }
   
     const { data, error } = await query;
