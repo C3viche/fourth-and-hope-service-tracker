@@ -94,8 +94,8 @@ export default function LogTable({
               value={entry.service}
               onChange={(e) => updateEntry(entry.id, "service", e.target.value)}
             >
-              {users.map((user) => (
-                <option key={user} value={user}>
+              {users.map((user, idx) => (
+                <option key={idx} value={user}>
                   {user}
                 </option>
               ))}
