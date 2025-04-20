@@ -31,24 +31,7 @@ export default function LogsContainer() {
   };
 
   const deleteLog = async (id: string) => {
-    console.log("CLICKED DELETE");
     setLogs(logs.filter(entry => entry.id !== id));
-    try {
-      const res = await fetch('/api/service-log', {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id }),
-      });
-  
-      if (!res.ok) {
-        console.error('Failed to delete log');
-        return;
-      }
-  
-      
-    } catch (err) {
-      console.error('Error deleting log:', err);
-    }
   };
 
   return (
