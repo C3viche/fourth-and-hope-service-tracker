@@ -18,7 +18,7 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   const navLinks = [
-    { name: 'Dashboard', href: '/home' },
+    { name: 'Dashboard', href: '/dashboard' },
     { name: 'Log', href: '/logger' },
     { name: 'Users', href: '/staff' },
   ];
