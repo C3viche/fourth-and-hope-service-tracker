@@ -138,40 +138,49 @@ export default function DashboardPage() {
     };
   
     return (
-      <section className={styles.section}>
-        <div className={styles.tabs}>
-          {tabs.map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`${styles.tab} ${activeTab === tab ? styles.active : ''}`}
-            >
-              {tab}
-            </button>
-          ))}
-          <motion.div
-            className={styles.slider}
-            layoutId="tab-slider"
-            transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-            style={{
-              width: `${100 / tabs.length}%`,
-              left: `${tabs.indexOf(activeTab) * (100 / tabs.length)}%`,
-            }}
-          />
-        </div>
-  
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeTab}
-            className={styles.content}
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -30 }}
-            transition={{ duration: 0.3 }}
-          >
-            {renderContent(activeTab)}
-          </motion.div>
-        </AnimatePresence>
-      </section>
+<section className={styles.section}>
+  {/* Tabs remain unchanged */}
+  <div className={styles.tabs}>
+    {tabs.map((tab) => (
+      <button
+        key={tab}
+        onClick={() => setActiveTab(tab)}
+        className={`${styles.tab} ${activeTab === tab ? styles.active : ''}`}
+      >
+        {tab}
+      </button>
+    ))}
+    <motion.div
+      className={styles.slider}
+      layoutId="tab-slider"
+      transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+      style={{
+        width: `${100 / tabs.length}%`,
+        left: `${tabs.indexOf(activeTab) * (100 / tabs.length)}%`,
+      }}
+    />
+  </div>
+
+  {/* Solution: Add a fixed-height wrapper with hidden overflow */}
+  <div style={{ 
+    minHeight: '450px', // Set this to your tallest tab's height
+    position: 'relative', // Needed for absolute positioning
+    overflow: 'hidden' // Prevents scroll jumps
+  }}>
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={activeTab}
+        className={styles.content}
+        initial={{ opacity: 0, y: 20 }} // Animate vertically instead of horizontally
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.3 }}
+        style={{ position: 'absolute', width: '100%' }} // Prevents layout shift
+      >
+        {renderContent(activeTab)}
+      </motion.div>
+    </AnimatePresence>
+  </div>
+</section>
     );
   }
